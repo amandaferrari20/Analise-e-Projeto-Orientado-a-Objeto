@@ -1,21 +1,21 @@
 #include "AmandaCalculator.h"
 
-void KeyboardAmanda::setCpu(CpuAmanda *cpu){
-  this->cpu = cpu;
-}
+// void Keyboard::setCpu(Cpu *cpu){
+//   this->cpu = cpu;
+// }
 
-void KeyAmanda::setReceiver(ReceiverAmanda* receiver){
-  this->receiver = receiver;
-}
+// void Key::setReceiver(Receiver* receiver){
+//   this->receiver = receiver;
+// }
 
 //void cancel();
 //void KeyDigit::press(){ this->receiver->receiveDigit(this->digit);
 //}
 
-void KeyControlAmanda::press(){ this->receiver->receiveControl(this->control);
+void KeyControl::press(){ this->receiver->receiveControl(this->control);
 }
 
-void KeyboardAmanda::addKey(KeyAmanda* k){
+void KeyboardAmanda::addKey(Key* k){
   if(this->Keycount < 110){
     this->keys[this->Keycount++] = k;
 		k->setReceiver(this);

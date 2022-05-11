@@ -1,4 +1,6 @@
 #include "AmandaCalculator.h"
+#include "CalculatorLucio.h"
+// #include "cpuAmanda.h"
 #include <iostream>
 #include <cstring>
 #include <cstdlib>
@@ -39,7 +41,7 @@ void CpuAmanda::receiveOperation(Operation operation){
   this->operation = operation;
 }
 
-//void CpuAmanda::cancel(){
+//void Cpu::cancel(){
 //  this->display->clear();
 
 //  if(this->operation == NONE){
@@ -57,9 +59,9 @@ void CpuAmanda::receiveOperation(Operation operation){
 // }
 
 
-void CpuAmanda::setDisplay(DisplayAmanda *display){
-  this->display = display;
-}
+// void CpuAmanda::setDisplay(DisplayAmanda *display){
+//   this->display = display;
+// }
 
 Digit CpuAmanda::intToDigit(int number, Digit *digit, int *digitLenght, Signal *signal){
   *digitLenght = 0;

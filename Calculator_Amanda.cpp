@@ -1,15 +1,15 @@
 #include "AmandaCalculator.h"
+#include "CalculatorLucio.h"
 #include <cstdlib>
 
-void CalculatorAmanda::calculator(CpuAmanda *cpu, DisplayAmanda *display, KeyDigitAmanda *numericKeyBoard, KeyOperationAmanda *operationKeyBoard){
-    
+void CalculatorAmanda::calculator(Cpu *cpu, Display *display, Keyboard *keyBoard){
+
   this->setCpu(cpu);
   this->setDisplay(display);
-  this->setKeyDigit(numericKeyBoard);
-  this->setKeyOperation(operationKeyBoard);
+  this->setKeyboard(keyBoard);
   this->cpu->setDisplay(display);
-  this->numericKeyBoard->setCpu(cpu);
-  this->operationKeyBoard->setCpu(cpu);
+  this->keyBoard->setCpu(cpu);
+  // this->operationKeyBoard->setCpu(cpu);
 }
 
 //CalculatorAmanda::~CalculatorAmanda(){
@@ -19,41 +19,44 @@ void CalculatorAmanda::calculator(CpuAmanda *cpu, DisplayAmanda *display, KeyDig
 //  delete this->operationKeyBoard;
 //}
 
-void CalculatorAmanda::setKeyDigit(KeyDigitAmanda *numericKeyBoard){
-  this->numericKeyBoard = numericKeyBoard;
+// void CalculatorAmanda::setKeyDigit(Keyboard *keyboard){
+//   this->keyBoard = keyBoard;
+// }
+
+void CalculatorAmanda:: setKeyboard(Keyboard* key){
+  this->keyBoard = key;
 }
 
-void CalculatorAmanda::setKeyOperation(KeyOperationAmanda *operationKeyBoard){
-  this->operationKeyBoard = operationKeyBoard;
-}
+// void CalculatorAmanda::setKeyOperation(KeyOperation *operationKeyBoard){
+//   this->operationKeyBoard = operationKeyBoard;
+// }
 
-KeyDigitAmanda* CalculatorAmanda::getKeyDigit(){
-  return this->numericKeyBoard;
-}
+// KeyDigit* CalculatorAmanda::getKeyDigit(){
+//   return this->numericKeyBoard;
+// }
 
-KeyOperationAmanda *CalculatorAmanda::getKeyOperation(){
-  return this->operationKeyBoard;
-}
+// KeyOperation *CalculatorAmanda::getKeyOperation(){
+//   return this->operationKeyBoard;
+// }
 
-void CalculatorAmanda::setDisplay(DisplayAmanda *display){
+void CalculatorAmanda::setDisplay(Display *display){
   this->display = display;
 }
 
-DisplayAmanda* CalculatorAmanda::getDisplay(){
+Display* CalculatorAmanda::getDisplay(){
   return this->display;
 }
 
-void CalculatorAmanda::setCpu(CpuAmanda* cpu){
+void CalculatorAmanda::setCpu(Cpu* cpu){
   this->cpu = cpu;
 }
 
-CpuAmanda* CalculatorAmanda::getCpu(){
+Cpu* CalculatorAmanda::getCpu(){
   return this->cpu;
   }
 
 CalculatorAmanda::~CalculatorAmanda(){
   delete this->cpu;
   delete this->display;
-  delete this->numericKeyBoard;
-  delete this->operationKeyBoard;
+  delete this->keyBoard;
 }

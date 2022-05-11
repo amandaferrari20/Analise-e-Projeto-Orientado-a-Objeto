@@ -10,18 +10,18 @@
 class DisplayAmanda : public Display{
    public:
      void add(Digit);
-     virtual void addDigit(Digit ) = 0;
-     virtual void setDecimalSeparator() = 0;
-     virtual void setSignal(Signal ) = 0;
-     virtual void setError() = 0;
-     virtual void clear() = 0;
+     void addDigit(Digit);
+     void setDecimalSeparator();
+     void setSignal(Signal );
+     void setError();
+     void clear();
 };
 
 class ReceiverAmanda: Receiver{
   public:
-     virtual void receiveDigit(Digit ) = 0;
-     virtual void receiveOperation(Operation ) = 0;
-     virtual void receiveControl(Control ) = 0;
+     void receiveDigit(Digit );
+     void receiveOperation(Operation );
+     void receiveControl(Control );
 
 };
 
@@ -54,80 +54,82 @@ class CpuAmanda: public Cpu{
   int digitToInt(Digit *digit,  int count);
   void setDisplay(DisplayAmanda*);
   void receiveDigit(Digit );
-  virtual void receiveOperation(Operation ) = 0;
-  virtual void receiveControl(Control ) = 0;
+   void receiveOperation(Operation );
+   void receiveControl(Control );
 };
 
-class KeyAmanda; 
+// class Key; 
 
 class KeyboardAmanda: public Keyboard{
-  CpuAmanda* cpu;
-  KeyAmanda* keys[110];
+  Cpu* cpu;
+  Key* keys[110];
   int Keycount = 0;
   public:
-  void setCpu(CpuAmanda* );
-  virtual void addKey(KeyAmanda* ) = 0;
-  virtual void receiveDigit(Digit ) = 0;
-  virtual void receiveOperation(Operation ) = 0;
-  virtual void receiveControl(Control ) = 0;
+  void setCpu(Cpu* );
+  void addKey(Key* );
+  void receiveDigit(Digit );
+  void receiveOperation(Operation );
+  void receiveControl(Control );
 };
 
-class KeyAmanda : Key{
-   protected:
-     ReceiverAmanda* receiver;
-   public:
-     void setReceiver(ReceiverAmanda* );
-      virtual void press() = 0;
-};
+// class Key{
+//    protected:
+//      Receiver* receiver;
+//    public:
+//     //  void setReceiver(Receiver* );
+//        void press();
+// };
 
-class KeyDigitAmanda: public KeyDigit{
-     Digit digit;
-   public:
-//O CONTRUTOR TEM Q TER MESMO NOME DA CXLASSE
-      KeyDigitAmanda(Digit );
-      void press();
-      void setCpu(Cpu* cpu);
-};
+// class KeyDigit: public Key{
+//      Digit digit;
+//    public:
+//       // KeyDigit(Digit );
+//       void press();
+//       // void setCpu(Cpu* cpu);
+// };
 
-class KeyOperationAmanda: public KeyOperation{
-   public:
-      Operation operation;
-      KeyOperationAmanda(Operation );
-      void press();
-      void setCpu(Cpu* cpu);
-};
+// class KeyOperation{
+//    public:
+//       Operation operation;
+//       // KeyOperation(Operation );
+//       void press();
+//       // void setCpu(Cpu* cpu);
+// };
 
-class KeyControlAmanda: public KeyControl{
-     Control control;
-  public:
-      KeyControlAmanda(Control );
-      void press();
-};
+// class KeyControlAmanda: public KeyControl{
+//      Control control;
+//   public:
+//       // KeyControlAmanda(Control );
+//       void press();
+// };
 
 class CalculatorAmanda : public Calculator{
-  CpuAmanda* cpu;
-  KeyDigitAmanda *numericKeyBoard;
-  KeyOperationAmanda *operationKeyBoard; 
-  DisplayAmanda *display;
+  Cpu* cpu;
+  // KeyDigit *KeyBoard;
+  // KeyOperation *operationKeyBoard; 
+  Display *display;
+  Keyboard* keyBoard;
+
   public:
-  void calculator(CpuAmanda *cpu, DisplayAmanda *display, KeyDigitAmanda     *numericKeyBoard, KeyOperationAmanda *operationKeyBoard);
+  void calculator(Cpu *cpu, Display *display, Keyboard *keyBoard);
+  CalculatorAmanda();
+  //  void setKeyDigit(KeyDigit* numericKeyBoard);
 
-   void setKeyDigit(KeyDigitAmanda* numericKeyBoard);
-
-    virtual KeyDigitAmanda* getKeyDigit();
+    KeyDigit* getKeyDigit();
     
-    void setKeyOperation(KeyOperationAmanda* operationKeyBoard);
+    // void setKeyOperation(KeyOperation* operationKeyBoard);
+    // KeyOperation* getKeyOperation();
 
-    virtual KeyOperationAmanda* getKeyOperation() = 0;
+    void setDisplay(Display* display);
+    Display* getDisplay();
 
-    void setDisplay(DisplayAmanda* display);
-    virtual DisplayAmanda* getDisplay() = 0;
+    void setCpu(Cpu* cpu);
 
-    void setCpu(CpuAmanda* cpu);
-//implementar
-    virtual CpuAmanda* getCpu() = 0;
+    Cpu* getCpu();
 
-CalculatorAmanda(CpuAmanda *cpu, DisplayAmanda *display, KeyDigitAmanda *numericKeyBoard, KeyOperationAmanda *operationKeyBoard){};
+    void setKeyboard(Keyboard* );
+
+// estava dando erro CalculatorAmanda(Cpu *cpu, Display *display, KeyDigit *keydigit, KeyOperation *operationKeyBoard){};
 
 ~CalculatorAmanda();
 };     

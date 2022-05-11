@@ -1,11 +1,12 @@
 #include "AmandaCalculator.h"
 #include <iostream>
+#include "mainCalculator.h"
 
 int mainCalculator(){
-  Calculator* calc1; // = new CalculatorLucio();
-  Cpu* cpu1;// = new CpuLucio();
-  Display* display1; // = new DisplayLucio();
-  Keyboard* k1; // = new KeyboardLucio();
+  CalculatorAmanda calc1;
+  CpuAmanda cpu1;
+  DisplayAmanda display1;
+  KeyboardAmanda k1; 
   KeyDigit key0(ZERO), key1(ONE), key2(TWO);
 
   KeyOperation keyAdd(ADDITION), keySub(SUBTRACTION);

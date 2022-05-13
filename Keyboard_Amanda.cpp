@@ -12,8 +12,7 @@
 //void KeyDigit::press(){ this->receiver->receiveDigit(this->digit);
 //}
 
-void KeyControl::press(){ this->receiver->receiveControl(this->control);
-}
+
 
 void KeyboardAmanda::addKey(Key* k){
   if(this->Keycount < 110){

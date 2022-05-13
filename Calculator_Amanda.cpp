@@ -2,7 +2,7 @@
 #include "CalculatorLucio.h"
 #include <cstdlib>
 
-void CalculatorAmanda::calculator(Cpu *cpu, Display *display, Keyboard *keyBoard){
+CalculatorAmanda::CalculatorAmanda(Cpu *cpu, Display *display, Keyboard *keyBoard){
 
   this->setCpu(cpu);
   this->setDisplay(display);

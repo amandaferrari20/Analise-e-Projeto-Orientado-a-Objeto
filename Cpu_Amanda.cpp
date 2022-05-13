@@ -14,22 +14,34 @@ CpuAmanda::CpuAmanda(){
   this->signal = POSITIVE;
 }
 
-void CpuAmanda::receiveDigit(Digit digit){
-  try{
-    if(this->operandOneCounter >= this->maxDigits) throw;
-    if(this->operandTwoCounter >= this->maxDigits) throw;
+// void CpuAmanda::receiveDigit(Digit digit){
+//   try{
+//     if(this->operandOneCounter >= this->maxDigits) throw;
+//     if(this->operandTwoCounter >= this->maxDigits) throw;
     
-    this->display->addDigit(digit);
+//     this->display->add(digit);
     
-    if(this->operation == NONE){
-      this->operandOne[this->operandOneCounter] = digit;
-      this->operandOneCounter++;
-    }else{
-      this->operandTwo[this->operandTwoCounter] = digit;
-      this->operandTwoCounter++;
-    }
-  }catch(...){}
+//     if(this->operation == NONE){
+//       this->operandOne[this->operandOneCounter] = digit;
+//       this->operandOneCounter++;
+//     }else{
+//       this->operandTwo[this->operandTwoCounter] = digit;
+//       this->operandTwoCounter++;
+//     }
+//   }catch(...){}
+// }
 
+
+void CpuAmanda::receiveDigit(Digit digit){
+
+	if ((this->operandOneCounter < maxDigits))
+	{
+		this->operandOne[this->operandOneCounter++] = digit;
+	}
+	else if ((operandTwoCounter < maxDigits && this->operation != NONE))
+	{
+		this->operandTwo[this->operandTwoCounter++] = digit;
+	}
 }
 
 void CpuAmanda::receiveOperation(Operation operation){
@@ -63,7 +75,7 @@ void CpuAmanda::receiveOperation(Operation operation){
 //   this->display = display;
 // }
 
-Digit CpuAmanda::intToDigit(int number, Digit *digit, int *digitLenght, Signal *signal){
+Digit CpuAmanda::intToDigit(int number, int *digitLenght, Signal *signal){
   *digitLenght = 0;
   *signal = (number < 0) ? NEGATIVE : POSITIVE;
 
@@ -78,7 +90,7 @@ Digit CpuAmanda::intToDigit(int number, Digit *digit, int *digitLenght, Signal *
     digit[*digitLenght-i-1] = temp;
   }
   //rever o retorno
-  // return *digit;
+  return *digit;
 }
 
 
@@ -94,39 +106,41 @@ int CpuAmanda::digitToInt(Digit *operand, int count){
 }
 
 
-int CpuAmanda::calculate(){
+Digit CpuAmanda::calculate(){
   int n1 = digitToInt(this->operandOne, this->operandOneCounter);
-  int n2 = digitToInt(this->operandOne, this->operandOneCounter);
+  int n2 = digitToInt(this->operandTwo, this->operandTwoCounter);
+  Digit a = ZERO;
 
   switch (this->operation){
   case ADDITION:
-    return this->intToDigit(n1+n2, this->operandOne, &this->operandOneCounter, &this->signal);
+    return this->intToDigit(n1+n2, &this->operandOneCounter+operandTwoCounter, &this->signal);
     break;
     
   case SUBTRACTION:
-    return this->intToDigit(n1-n2, this->operandOne, &this->operandOneCounter, &this->signal);
+    return this->intToDigit(n1-n2, &this->operandOneCounter+operandTwoCounter, &this->signal);
     break;
     
   case DIVISION:
-     return this->intToDigit(n1/n2, this->operandOne, &this->operandOneCounter, &this->signal);
+     return this->intToDigit(n1/n2, &this->operandOneCounter+operandTwoCounter, &this->signal);
     break;
     
   case MULTIPLICATION:
-    return this->intToDigit(n1*n2, this->operandOne, &this->operandOneCounter, &this->signal);
+    return this->intToDigit(n1*n2, &this->operandOneCounter+operandTwoCounter, &this->signal);
     break;
   
   case SQUARE_ROOT:
-    return this->intToDigit(sqrt(n1), this->operandOne, &this->operandOneCounter, &this->signal);
+    return this->intToDigit(sqrt(n1), &this->operandOneCounter+operandTwoCounter, &this->signal);
     break;
 
   case PERCENTAGE:
-    return this->intToDigit((n1/n2)*100, this->operandOne, &this->operandOneCounter, &this->signal);
+    return this->intToDigit((n1/n2)*100, &this->operandOneCounter+operandTwoCounter, &this->signal);
     break;
 
   //nao sei o que fazer no case NONE
   case NONE:
     break;
-  }
+   }
+   return a;
 }
 
   void CpuAmanda::receiveControl(Control control){
@@ -169,7 +183,7 @@ int CpuAmanda::calculate(){
   this->display->clear();
   this->display->setSignal(this->signal);
   for(int i = 0; i < this->operandOneCounter; i++){
-    this->display->addDigit(this->operandOne[i]);
+    this->display->add(this->operandOne[i]);
   }
 
   this->operandOneCounter = 0;

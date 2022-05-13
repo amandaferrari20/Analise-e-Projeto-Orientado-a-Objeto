@@ -1,8 +1,8 @@
 #include "AmandaCalculator.h"
-#include "CalculatorLucio.h""
+#include "CalculatorLucio.h"
 #include <iostream>
 
-void DisplayAmanda::addDigit(Digit number){
+void DisplayAmanda::add(Digit number){
   switch (number){
   case ZERO:
     std::cout << "0";
@@ -38,11 +38,11 @@ void DisplayAmanda::addDigit(Digit number){
 };
 
 
-void Display::setDecimalSeparator(){
+void DisplayAmanda::setDecimalSeparator(){
   std::cout << ".";
 }
 
-void Display::setSignal(Signal signal){
+void DisplayAmanda::setSignal(Signal signal){
   switch(signal){
     case POSITIVE:
       std::cout <<"" ;
@@ -53,6 +53,6 @@ void Display::setSignal(Signal signal){
   };
 }
 
-void Display::clear(){
+void DisplayAmanda::clear(){
   std::cout << "\n";  
 };

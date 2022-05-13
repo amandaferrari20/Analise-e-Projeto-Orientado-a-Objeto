@@ -10,10 +10,8 @@
 class DisplayAmanda : public Display{
    public:
      void add(Digit);
-     void addDigit(Digit);
      void setDecimalSeparator();
      void setSignal(Signal );
-     void setError();
      void clear();
 };
 
@@ -28,6 +26,7 @@ class ReceiverAmanda: Receiver{
 class CpuAmanda: public Cpu{
   DisplayAmanda* display;
   Digit *operandOne;
+  Digit *digit;
   Digit *operandTwo;
   int operandOneCounter;
   int operandTwoCounter;
@@ -47,10 +46,10 @@ class CpuAmanda: public Cpu{
 
   public:
   CpuAmanda();
-  Digit intToDigit(int number, Digit *digit, int *digitLenght, Signal *signal);
+  Digit intToDigit(int number, int *digitLenght, Signal *signal);
   void cancel();
   void reset();
-  int calculate();
+  Digit calculate();
   int digitToInt(Digit *digit,  int count);
   void setDisplay(DisplayAmanda*);
   void receiveDigit(Digit );
@@ -111,8 +110,8 @@ class CalculatorAmanda : public Calculator{
   Keyboard* keyBoard;
 
   public:
-  void calculator(Cpu *cpu, Display *display, Keyboard *keyBoard);
-  CalculatorAmanda();
+  // void calculator(Cpu *cpu, Display *display, Keyboard *keyBoard);
+  CalculatorAmanda(Cpu *cpu, Display *display, Keyboard *keyBoard);
   //  void setKeyDigit(KeyDigit* numericKeyBoard);
 
     KeyDigit* getKeyDigit();
